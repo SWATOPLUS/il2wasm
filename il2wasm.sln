@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28306.52
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.28711.60
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "il2wasm", "il2wasm\il2wasm.csproj", "{8BD1ECA0-D21C-4567-B567-0D52A4A7A6F9}"
 EndProject
@@ -13,7 +13,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyWebHost", "samples\MyWebH
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorStandalone", "samples\BlazorStandalone\BlazorStandalone.csproj", "{E21D5623-D663-4D98-9660-640C390076DF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyConsoleHost", "samples\MyConsoleHost\MyConsoleHost.csproj", "{824E8FD1-DBD5-4360-932A-63D909E71129}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyConsoleHost", "samples\MyConsoleHost\MyConsoleHost.csproj", "{824E8FD1-DBD5-4360-932A-63D909E71129}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyInterLibrary", "MyInterLibrary\MyInterLibrary.csproj", "{D73B3714-22FF-4335-8376-DFEB20512253}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -41,6 +43,10 @@ Global
 		{824E8FD1-DBD5-4360-932A-63D909E71129}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{824E8FD1-DBD5-4360-932A-63D909E71129}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{824E8FD1-DBD5-4360-932A-63D909E71129}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D73B3714-22FF-4335-8376-DFEB20512253}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D73B3714-22FF-4335-8376-DFEB20512253}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D73B3714-22FF-4335-8376-DFEB20512253}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D73B3714-22FF-4335-8376-DFEB20512253}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

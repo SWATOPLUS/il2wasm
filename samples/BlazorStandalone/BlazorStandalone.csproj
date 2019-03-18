@@ -25,6 +25,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\MyInterLibrary\MyInterLibrary.csproj" />
     <ProjectReference Include="..\MyLibrary\MyLibrary.csproj" AotCompile="true" />
   </ItemGroup>
 

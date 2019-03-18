@@ -1,0 +1,56 @@
+﻿@page "/primes-wasm"
+@using MyLibrary
+@using System.Collections.Generic
+@using System.Linq
+@using System
+<h1>Primes Wasm</h1>
+
+<p>
+    Get Nth prime: <input type="number" bind=@n />
+    Experiments count <input type="number" bind=@e />
+    Show results <input type="checkbox" bind=@r />
+    <button class="btn btn-primary" onclick="@Compute">Compute</button>
+    <button class="btn btn-primary" onclick="@Clear">Clear</button>
+</p>
+
+<p>
+    Output:
+    <pre>@log</pre>
+</p>
+
+@functions {
+    int n = 10;
+    int e = 10;
+    bool r = true;
+    string log;
+
+    void Clear()
+    {
+        log = string.Empty;
+    }
+
+    void Compute()
+    {
+        var time = new List<double>();
+
+        foreach (var i in Enumerable.Range(0, e))
+        {
+            var start = DateTime.Now;
+            var result = Test.RunComputation(n);
+            var duration = (DateTime.Now - start).TotalMilliseconds;
+
+            time.Add(duration);
+
+            if (r)
+            {
+                log += $"\nThe {n}th prime is: {result} (time: {duration}ms)";
+            }
+        }
+
+        var mean = time.Average();
+        var deviation = Math.Sqrt(time.Average(d => (d - mean) * (d - mean)));
+        var rate = deviation / mean;
+
+        log += $"\n mean: {mean} ms, deviation: {deviation} ms, rate {rate * 100}%";
+    }
+}
