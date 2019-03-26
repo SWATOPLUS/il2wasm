@@ -1,0 +1,73 @@
+﻿@using System
+@using System.Text
+<p>
+    Get Nth prime: <input type="number" bind=@NumberIndex />
+    Experiments count <input type="number" bind=@ExperimentsCount />
+    Show results <input type="checkbox" bind=@ShowResults />
+    Skip count <input type="number" bind=@SkipCount />
+    <button class="btn btn-primary" onclick="@(() => Compute())">Compute</button>
+    <button class="btn btn-primary" onclick="@Clear">Clear</button>
+</p>
+
+<p>
+    Output:
+    <pre>@Log</pre>
+</p>
+
+@functions {
+    int NumberIndex = 10;
+    int ExperimentsCount = 10;
+    bool ShowResults = false;
+    int SkipCount = 3;
+    string Log { get; set; }
+
+    [Parameter]
+    Func<int, double> Action { get; set; }
+
+    void Clear()
+    {
+        Log = string.Empty;
+    }
+
+    double Compute()
+    {
+        var time = new List<double>();
+        var logBuilder = new StringBuilder();
+
+        foreach (var i in Enumerable.Range(0, ExperimentsCount))
+        {
+            var start = DateTime.Now;
+            var result = Action(NumberIndex);
+            var duration = (DateTime.Now - start).TotalMilliseconds;
+
+            logBuilder.Append($"The {NumberIndex}th prime is: {result} (time: {duration} ms)");
+
+            if (i < SkipCount)
+            {
+                logBuilder.Append("\tSkipped!");
+            }
+            else
+            {
+                time.Add(duration);
+            }
+
+            logBuilder.AppendLine();
+        }
+
+        if (!ShowResults)
+        {
+            logBuilder.Clear();
+        }
+
+        var mean = time.Average();
+        var deviation = Math.Sqrt(time.Average(d => (d - mean) * (d - mean)));
+        var rate = deviation / mean;
+
+        Log = Log
+              + "\n"
+              + logBuilder
+              + $"NumberIndex mean: {mean} ms, deviation: {deviation} ms, rate {rate * 100:F2}%";
+
+        return mean;
+    }
+}
