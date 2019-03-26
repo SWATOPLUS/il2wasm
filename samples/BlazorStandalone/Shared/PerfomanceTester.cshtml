@@ -1,4 +1,5 @@
 ﻿@using System
+@using System.Linq
 @using System.Text
 <p>
     Get Nth prime: <input type="number" bind=@NumberIndex />
@@ -6,6 +7,7 @@
     Show results <input type="checkbox" bind=@ShowResults />
     Skip count <input type="number" bind=@SkipCount />
     <button class="btn btn-primary" onclick="@(() => Compute())">Compute</button>
+    <button class="btn btn-primary" onclick="@GetStats">Get stats</button>
     <button class="btn btn-primary" onclick="@Clear">Clear</button>
 </p>
 
@@ -29,7 +31,25 @@
         Log = string.Empty;
     }
 
-    double Compute()
+    void GetStats()
+    {
+        var parts = 20;
+        var stats = new StringBuilder();
+
+        var indexes = Enumerable.Range(0, parts + 1)
+            .Select(x => NumberIndex / parts * x);
+
+        foreach (var index in indexes)
+        {
+            var result = Compute(index);
+
+            stats.AppendLine($"{index}\t{result}");
+        }
+
+        Log += "\n" + stats;
+    }
+
+    double Compute(int? index = null)
     {
         var time = new List<double>();
         var logBuilder = new StringBuilder();
@@ -37,7 +57,7 @@
         foreach (var i in Enumerable.Range(0, ExperimentsCount))
         {
             var start = DateTime.Now;
-            var result = Action(NumberIndex);
+            var result = Action(index ?? NumberIndex);
             var duration = (DateTime.Now - start).TotalMilliseconds;
 
             logBuilder.Append($"The {NumberIndex}th prime is: {result} (time: {duration} ms)");
@@ -63,10 +83,9 @@
         var deviation = Math.Sqrt(time.Average(d => (d - mean) * (d - mean)));
         var rate = deviation / mean;
 
-        Log = Log
-              + "\n"
-              + logBuilder
-              + $"NumberIndex mean: {mean} ms, deviation: {deviation} ms, rate {rate * 100:F2}%";
+        Log += "\n"
+               + logBuilder
+               + $"NumberIndex mean: {mean:F2} ms, deviation: {deviation:F2} ms, rate {rate * 100:F2}%";
 
         return mean;
     }
