@@ -1,0 +1,37 @@
+﻿@page "/render-blazor"
+@using System.Collections.Generic
+@using System.Linq
+@using System.Runtime.InteropServices
+@using MyInterLibrary
+<h1>Render Blazor</h1>
+
+
+<input type="number" bind="@Count" />
+<button onclick="@Action">Boom!</button>
+<button onclick="@Clear">Clear</button>
+
+
+<ul>
+    @foreach (var x in Items)
+    {
+        <li>@x</li>
+    }
+</ul>
+@functions
+{
+    IEnumerable<int> Items { get; set; } = Enumerable.Empty<int>();
+
+    int Count { get; set; } = 100000;
+
+    void Action()
+    {
+        Items = Enumerable.Range(0, Count);
+    }
+
+    void Clear()
+    {
+        Count = 0;
+        Action();
+    }
+
+}
