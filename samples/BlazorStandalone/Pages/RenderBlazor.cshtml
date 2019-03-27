@@ -7,7 +7,7 @@
 
 
 <input type="number" bind="@Count" />
-<button onclick="@Action">Boom!</button>
+<button onclick="@(x=> Action())">Boom!</button>
 <button onclick="@Clear">Clear</button>
 
 
@@ -23,15 +23,14 @@
 
     int Count { get; set; } = 100000;
 
-    void Action()
+    void Action(int? x = null)
     {
-        Items = Enumerable.Range(0, Count);
+        Items = Enumerable.Range(0, x ?? Count);
     }
 
     void Clear()
     {
-        Count = 0;
-        Action();
+        Action(0);
     }
 
 }
