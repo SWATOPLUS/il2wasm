@@ -1,45 +1,31 @@
-﻿using System;
-
-namespace MyInterLibrary
+﻿namespace MyInterLibrary
 {
     public static class InterTest
     {
-        public static int RunComputation(int myArg)
+        public static int GetNthPrime(int n)
         {
-            var result = GetNthPrime(myArg);
-            Console.WriteLine(result); // To show we can call from AOT code into interpreted code
-            return result;
-        }
-
-        static int GetNthPrime(int n)
-        {
-            var primeCalculator = new PrimeCalculator();
-
-            for (var i = 0; i < n - 1; i++)
+            if (n < 2)
             {
-                primeCalculator.ComputeNextPrime();
+                return 2;
             }
 
-            return primeCalculator.ComputeNextPrime();
-        }
-    }
+            var current = 1;
+            var count = 1;
 
-    class PrimeCalculator
-    {
-        private int current = 1;
-
-        public int ComputeNextPrime()
-        {
-            do
+            while (count != n)
             {
-                current++;
-            }
-            while (!IsPrime(current));
+                current += 2;
 
-            return current;
+                if (IsPrime(current))
+                {
+                    count++;
+                }
+            }
+
+            return n;
         }
 
-        static bool IsPrime(int value)
+        public static bool IsPrime(int value)
         {
             for (var possibleDivisor = 2; possibleDivisor * possibleDivisor <= value; possibleDivisor++)
             {

@@ -10,6 +10,6 @@
 {
     double Action(int n)
     {
-        return ((IJSInProcessRuntime)jsRuntime).Invoke<int>("Primes.RunComputation", n);
+        return ((IJSInProcessRuntime)jsRuntime).Invoke<int>("Primes.GetNthPrime", n);
     }
 }
