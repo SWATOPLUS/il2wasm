@@ -10,11 +10,13 @@
 {
     double Action(int n)
     {
+        var runtime = (IJSInProcessRuntime) jsRuntime;
+
         for (int i = 0; i < n; i++)
         {
             for (int j = 0; j < 1000; j++)
             {
-                ((IJSInProcessRuntime)jsRuntime).Invoke<int>("Primes.Nop", n);
+                runtime.Invoke<int>("Primes.Nop", n);
             }
         }
 
