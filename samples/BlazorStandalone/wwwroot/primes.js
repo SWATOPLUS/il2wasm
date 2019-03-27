@@ -1,4 +1,4 @@
-﻿var Primes = { GetNthPrime: null };
+﻿var Primes = { GetNthPrime: null, Nop: null };
 
 (function (Primes) {
 
@@ -31,5 +31,11 @@
 		return true;
     }
 
+	function Nop(x) {
+		return x;
+	}
+
     Primes.GetNthPrime = GetNthPrime;
+    Primes.Nop = Nop;
+
 })(Primes);

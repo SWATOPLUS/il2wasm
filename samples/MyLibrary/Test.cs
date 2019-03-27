@@ -2,6 +2,11 @@
 {
     public static class Test
     {
+        public static int Nop(int x)
+        {
+            return x;
+        }
+
         public static int GetNthPrime(int n)
         {
             if (n < 2)

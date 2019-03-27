@@ -2,6 +2,11 @@
 {
     public static class InterTest
     {
+        public static int Nop(int x)
+        {
+            return x;
+        }
+
         public static int GetNthPrime(int n)
         {
             if (n < 2)

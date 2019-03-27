@@ -1,0 +1,23 @@
+﻿@page "/nop-js"
+@using Microsoft.JSInterop
+@using MyLibrary
+@inject IJSRuntime jsRuntime
+
+<h1>Primes Js</h1>
+<PerfomanceTester Action="@Action" />
+
+@functions
+{
+    double Action(int n)
+    {
+        for (int i = 0; i < n; i++)
+        {
+            for (int j = 0; j < 1000; j++)
+            {
+                ((IJSInProcessRuntime)jsRuntime).Invoke<int>("Primes.Nop", n);
+            }
+        }
+
+        return 0;
+    }
+}
